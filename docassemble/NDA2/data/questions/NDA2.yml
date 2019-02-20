@@ -1,0 +1,95 @@
+metadata:
+  title: Two way mutual NDA
+  example start: 4
+  documentation: "https://docassemble.org/docs/fields.html#fields"
+---
+objects:
+- party1: Person
+- party2: Person
+---
+modules:
+  - docassemble.base.util
+---
+mandatory: True
+question: |
+  Your document is ready.
+subquestion: |
+  Thank you for using this interview.
+attachments:
+  - name: Mutual NDA
+    filename: Mutual_NDA
+    docx template file: Precedent_Template_Mutual_NDA.docx
+    congtent file: Precedent_Template_Mutual_NDA.md
+    fields:
+    - party1name: ${ party1 }
+    - party2name: ${ party2 }
+    - party1address: ${ party1address }
+    - party2address: ${ party2address }
+    - party1companyno: ${ party1companyno }
+    - party2companyno: ${ party2companyno }
+    - party1addresstype: ${ party1addresstype }
+    - party2addresstype: ${ party2addresstype }
+    - effectivedate: ${ effectivedate }
+    - purpose: ${ purpose }
+---
+question: Tell me more about the two parties
+fields:
+  - note: |
+      #### Party 1
+
+      Tell me about the first party
+  - Name: party1.name.text
+  - Type of person: party1type
+    datatype: radio
+    choices:
+     - individual: individual
+     - company or partnership: legalperson
+  - Address Type: party1addresstype
+    show if:
+      variable: party1type
+      is: legalperson
+    datatype: radio
+    choices:
+      - Registered office: registered office
+      - Place of business: place of business
+    required: False
+  - Company number: party1companyno
+    show if:
+      variable: party1type
+      is: legalperson
+    required: False
+  - Address: party1address
+      
+####Party 2
+  - note: |
+      #### Party 2
+
+      Tell me about your the second party
+  - Name: party2.name.text
+  - Type of person: party2type
+    datatype: radio
+    choices:
+     - individual: individual
+     - company or partnership: legalperson
+  - Address Type: party2addresstype
+    show if:
+      variable: party2type
+      is: legalperson
+    datatype: radio
+    choices:
+      - Registered office: registered office
+      - Place of business: place of business
+    required: False
+  - Company number: party2companyno
+    show if:
+      variable: party2type
+      is: legalperson
+    required: False
+  - Address: party2address
+
+      
+---
+question: Tell me more about the purpose
+fields:
+  - Purpose: purpose
+  - Effective Date: effectivedate
